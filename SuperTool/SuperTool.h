@@ -22,8 +22,6 @@
 #import <GlyphsApp/GSToolSelect.h>
 #endif
 
-//#define DEBUG_MODE
-
 @class GSPathSegment;
 @class GSLayer;
 @class SCPathTime;
