@@ -21,6 +21,8 @@
 #import "SuperTool+Coverage.h"
 #import <GlyphsCore/GSPath+PenDrawing.h>
 
+#import "GSNode+SCNodeUtils.h"
+
 @implementation SuperTool
 
 - (id)init {
@@ -67,7 +69,7 @@
 }
 
 - (NSUInteger)interfaceVersion {
-    // Distinguishes the API verison the plugin was built for. Return 1.
+    // Distinguishes the API version the plugin was built for. Return 1.
     return 1;
 }
 
@@ -83,6 +85,10 @@
 - (NSString *)title {
     // return the name of the tool as it will appear in the tooltip of in the toolbar.
     return @"SuperTool";
+}
+
+- (NSImage *)toolBarIcon {
+    return _toolBarIcon;
 }
 
 - (BOOL)willSelectTempTool:(id)tempTool {
@@ -119,7 +125,7 @@
     GSNode *n;
     NSOrderedSet *sel = [currentLayer selection];
     for (n in sel) {
-        if ([n isKindOfClass:[GSNode class]] && [n type] != OFFCURVE) {
+        if ([n isKindOfClass:[GSNode class]] && [n type] != GSNodeTypeOffCurve) {
             if ([sel containsObject:[n nextOnCurve]]) return TRUE;
             if ([sel containsObject:[n prevOnCurve]]) return TRUE;
         }
@@ -133,9 +139,9 @@
     GSNode *n;
     for (n in [currentLayer selection]) {
         if (![n isKindOfClass:[GSNode class]]) continue;
-        if ([n type] == OFFCURVE && [[n nextNode] type] == OFFCURVE) {
+        if ([n type] == GSNodeTypeOffCurve && [[n nextNode] type] == GSNodeTypeOffCurve) {
             return TRUE;
-        } else if ([n type] == OFFCURVE && [[n prevNode] type] == OFFCURVE) {
+        } else if ([n type] == GSNodeTypeOffCurve && [[n prevNode] type] == GSNodeTypeOffCurve) {
             return TRUE;
         }
     }
@@ -148,7 +154,7 @@
         NSUInteger nodeIdx = 0;
         for (GSNode *node in path.nodes) {
             // SCLog(@"Looking at segment %@", seg);
-            if (node.type == CURVE) {
+            if (node.type == GSNodeTypeCubicCurve) {
                 handler([path positionAtIndex:nodeIdx - 3], [path positionAtIndex:nodeIdx - 2], [path positionAtIndex:nodeIdx - 1], node.position);
             }
             nodeIdx++;

@@ -13,9 +13,7 @@
 // limitations under the License.
 
 #import "SCPathTime.h"
-#import <GlyphsCore/GSPath.h>
-#import <GlyphsCore/GSPathSegment.h>
-#import <GlyphsCore/GSGeometrieHelper.h>
+#import <GlyphsCore/GlyphsCore.h>
 
 @implementation SCPathTime
 

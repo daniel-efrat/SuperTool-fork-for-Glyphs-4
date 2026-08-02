@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #import "SuperTool+TunniEditing.h"
+#import "GSNode+SCNodeUtils.h"
 
 @implementation SuperTool (TunniEditing)
 
@@ -32,8 +33,8 @@ bool initDone = false;
     drawTunniTwo = [[NSMenuItem alloc] initWithTitle:@"Show Tunni lines" action:@selector(displayTunniState:) keyEquivalent:@""];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults boolForKey:drawTunniDefault]) {
-        [drawTunni setState:NSOnState];
-        [drawTunniTwo setState:NSOnState];
+        [drawTunni setState:NSControlStateValueOn];
+        [drawTunniTwo setState:NSControlStateValueOn];
     }
     [defaults registerDefaults:@{lineZoomDefault: @(DEFAULT_ZOOM_THRESHOLD)}];
     
@@ -55,13 +56,13 @@ bool initDone = false;
 }
 
 - (void)displayTunniState:(id)sender {
-    if ([sender state] == NSOnState) {
-        [drawTunni setState:NSOffState];
-        [drawTunniTwo setState:NSOffState];
+    if ([sender state] == NSControlStateValueOn) {
+        [drawTunni setState:NSControlStateValueOff];
+        [drawTunniTwo setState:NSControlStateValueOff];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:drawTunniDefault];
     } else {
-        [drawTunni setState:NSOnState];
-        [drawTunniTwo setState:NSOnState];
+        [drawTunni setState:NSControlStateValueOn];
+        [drawTunniTwo setState:NSControlStateValueOn];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:drawTunniDefault];
     }
 
@@ -70,8 +71,8 @@ bool initDone = false;
 
 - (void)tunniMouseDown:(NSEvent *)theEvent {
     // Called when the mouse button is clicked.
-    if ([drawTunni state] != NSOnState) return [super mouseDown:theEvent];
-    
+    if ([drawTunni state] != NSControlStateValueOn) return [super mouseDown:theEvent];
+
     GSLayer *currentLayer = [_editViewController.graphicView activeLayer];
     NSPoint start = [_editViewController.graphicView getActiveLocation:theEvent];
     /* Would love to use the block here but variable scoping rules don't allow it */
@@ -170,11 +171,11 @@ bool initDone = false;
     for (n in [currentLayer selection]) {
         if (![n isKindOfClass:[GSNode class]]) continue;
         // Find the segment for this node and add it to the set
-        if ([n type] == OFFCURVE && [[n nextNode] type] == OFFCURVE) {
+        if ([n type] == GSNodeTypeOffCurve && [[n nextNode] type] == GSNodeTypeOffCurve) {
             // Add prev, this, next, and next next to the set
             NSArray *a = [NSArray arrayWithObjects:[n prevNode], n, [n nextNode], [[n nextNode] nextNode], nil];
             [segments addObject:a];
-        } else if ([n type] == OFFCURVE && [[n prevNode] type] == OFFCURVE) {
+        } else if ([n type] == GSNodeTypeOffCurve && [[n prevNode] type] == GSNodeTypeOffCurve) {
             // Add prev prev, prev, this and next to the set
             NSArray *a = [NSArray arrayWithObjects:[[n prevNode] prevNode], [n prevNode], n, [n nextNode], nil];
             [segments addObject:a];
@@ -242,7 +243,7 @@ bool initDone = false;
 }
 
 - (void)drawTunniBackground:(GSLayer *)Layer {
-    BOOL doDrawTunni = [drawTunni state] == NSOnState;
+    BOOL doDrawTunni = [drawTunni state] == NSControlStateValueOn;
     if (!doDrawTunni) return;
     NSUInteger upem = Layer.font.unitsPerEm;
     float tunniZoomThreshold = [[NSUserDefaults standardUserDefaults] floatForKey:lineZoomDefault];

@@ -14,6 +14,7 @@
 
 #import "SuperTool+Harmonize.h"
 #import "SuperTool+TunniEditing.h"
+#import "GSNode+SCNodeUtils.h"
 
 @implementation SuperTool (Harmonize)
 static bool inited = false;
@@ -35,11 +36,11 @@ static bool inited = false;
 
 - (void)harmonize:(GSNode *)a3 {
     if (![a3 isKindOfClass:[GSNode class]]) return;
-    if ([a3 connection] != SMOOTH) return;
-    GSNode *a2 = [a3 prevNode]; if ([a2 type] != OFFCURVE) return;
-    GSNode *a1 = [a2 prevNode]; if ([a1 type] != OFFCURVE) return;
-    GSNode *b1 = [a3 nextNode]; if ([b1 type] != OFFCURVE) return;
-    GSNode *b2 = [b1 nextNode]; if ([b2 type] != OFFCURVE) return;
+    if ([a3 connection] != GSNodeConnectionSmooth) return;
+    GSNode *a2 = [a3 prevNode]; if ([a2 type] != GSNodeTypeOffCurve) return;
+    GSNode *a1 = [a2 prevNode]; if ([a1 type] != GSNodeTypeOffCurve) return;
+    GSNode *b1 = [a3 nextNode]; if ([b1 type] != GSNodeTypeOffCurve) return;
+    GSNode *b2 = [b1 nextNode]; if ([b2 type] != GSNodeTypeOffCurve) return;
     NSPoint d = GSIntersectLineLineUnlimited([a1 position], [a2 position], [b1 position], [b2 position]);
     CGFloat p0 = GSDistance([a1 position], [a2 position]) / GSDistance([a2 position], d);
     CGFloat p1 = GSDistance(d, [b1 position]) / GSDistance([b1 position], [b2 position]);

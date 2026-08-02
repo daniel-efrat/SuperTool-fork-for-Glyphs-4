@@ -98,19 +98,19 @@ static bool inited = false;
     [flip setRepresentedObject:flipDefault];
 
     if ([defaults boolForKey:drawCurvesDefault]) {
-        [drawCurves setState:NSOnState];
-        [drawCurvesTwo setState:NSOnState];
+        [drawCurves setState:NSControlStateValueOn];
+        [drawCurvesTwo setState:NSControlStateValueOn];
     }
     if ([defaults boolForKey:drawRainbowsDefault]) {
-        [drawRainbows setState:NSOnState];
+        [drawRainbows setState:NSControlStateValueOn];
     }
     if ([defaults boolForKey:drawSpotsDefault]) {
-        [drawSpots setState:NSOnState];
+        [drawSpots setState:NSControlStateValueOn];
     }
     if (![defaults boolForKey:fadeDefault]) {
-        [fade setState:NSOffState];
+        [fade setState:NSControlStateValueOff];
     } else {
-        [fade setState:NSOnState];
+        [fade setState:NSControlStateValueOn];
     }
     inited = true;
 }
@@ -131,11 +131,11 @@ static bool inited = false;
 }
 
 - (void)displayCurvatureState:(id)sender {
-    if ([sender state] == NSOnState) {
-        [sender setState:NSOffState];
+    if ([sender state] == NSControlStateValueOn) {
+        [sender setState:NSControlStateValueOff];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:[sender representedObject]];
     } else {
-        [sender setState:NSOnState];
+        [sender setState:NSControlStateValueOn];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:[sender representedObject]];
     }
     if (sender == drawCurves) { [drawCurvesTwo setState:[sender state]]; }
@@ -144,9 +144,9 @@ static bool inited = false;
 }
 
 - (void)drawCurvatureBackground:(GSLayer *)Layer {
-    BOOL doDrawCurves = [drawCurves state] == NSOnState;
-    BOOL doDrawRainbows = [drawRainbows state] == NSOnState;
-    BOOL doDrawSpots = [drawSpots state] == NSOnState;
+    BOOL doDrawCurves = [drawCurves state] == NSControlStateValueOn;
+    BOOL doDrawRainbows = [drawRainbows state] == NSControlStateValueOn;
+    BOOL doDrawSpots = [drawSpots state] == NSControlStateValueOn;
     __block float maxC = 0.0;
     if (doDrawCurves) {
         [self iterateOnCurvedSegmentsOfLayer:Layer withBlock:^(NSPoint p1, NSPoint p2, NSPoint p3, NSPoint p4) {
@@ -158,7 +158,7 @@ static bool inited = false;
     maxC = MIN(maxC, 1);
     SCLog(@"Max curve for glyph: %f", maxC);
     // Grab user options
-    BOOL alwaysShow = [fade state] == NSOffState;
+    BOOL alwaysShow = [fade state] == NSControlStateValueOff;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     float combScale = [defaults floatForKey:combScaleDefault];
     BOOL flipComb = [defaults boolForKey:flipDefault];
@@ -178,10 +178,10 @@ static bool inited = false;
         for (GSNode *n in p.nodes) {
             nodeIdx++;
             // We only want smooth nodes with handles on each side
-            if (n.type != CURVE || n.connection != SMOOTH) continue;
+            if (n.type != GSNodeTypeCubicCurve || n.connection != GSNodeConnectionSmooth) continue;
             GSNode *nextNode = [p nodeAtIndex:nodeIdx + 1];
             GSNode *prevNode = [p nodeAtIndex:nodeIdx - 1];
-            if (nextNode.type != OFFCURVE || prevNode.type != OFFCURVE) continue;
+            if (nextNode.type != GSNodeTypeOffCurve || prevNode.type != GSNodeTypeOffCurve) continue;
 
             // Compute the curvature coming out of the node
             CGFloat cForward = GSDistance(n.position, nextNode.position);

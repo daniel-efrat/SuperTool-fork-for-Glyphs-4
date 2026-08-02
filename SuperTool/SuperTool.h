@@ -16,15 +16,12 @@
 
 #import <Cocoa/Cocoa.h>
 #import <GlyphsCore/GSToolSelect.h>
-#import <GlyphsCore/GSLayer.h>
-#import <GlyphsCore/GSPath.h>
-#import <GlyphsCore/GSPathSegment.h>
-#import <GlyphsCore/GSGeometrieHelper.h>
-#import "GSNode+SCNodeUtils.h"
-#import "GSPath+SCPathUtils.h"
-#import "SCPathTime.h"
 
 //#define DEBUG_MODE
+
+@class GSPathSegment;
+@class GSLayer;
+@class SCPathTime;
 
 /* Modes for Callipers */
 typedef enum {

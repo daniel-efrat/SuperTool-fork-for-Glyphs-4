@@ -23,7 +23,7 @@ NSString *drawCoverageDefault = @"org.simon-cozens.SuperTool.drawingCoverage";
 - (void)initCoverage {
     drawCoverage = [[NSMenuItem alloc] initWithTitle:@"Show coverage" action:@selector(displayCoverageState) keyEquivalent:@""];
     if ([[NSUserDefaults standardUserDefaults] boolForKey:drawCoverageDefault]) {
-        [drawCoverage setState:NSOnState];
+        [drawCoverage setState:NSControlStateValueOn];
     }
 }
 
@@ -32,18 +32,18 @@ NSString *drawCoverageDefault = @"org.simon-cozens.SuperTool.drawingCoverage";
 }
 
 - (void)displayCoverageState {
-    if ([drawCoverage state] == NSOnState) {
-        [drawCoverage setState:NSOffState];
+    if ([drawCoverage state] == NSControlStateValueOn) {
+        [drawCoverage setState:NSControlStateValueOff];
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:drawCoverageDefault];
     } else {
-        [drawCoverage setState:NSOnState];
+        [drawCoverage setState:NSControlStateValueOn];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:drawCoverageDefault];
     }
     [_editViewController.graphicView setNeedsDisplay:YES];
 }
 
 - (void)showCoverage:(GSLayer *)Layer {
-    BOOL doDrawCoverage = [drawCoverage state] == NSOnState;
+    BOOL doDrawCoverage = [drawCoverage state] == NSControlStateValueOn;
     if (!doDrawCoverage) return;
     float cov = [Layer coverage];
     NSPoint p = NSMakePoint(Layer.width / 2, Layer.glyphMetrics.ascender);

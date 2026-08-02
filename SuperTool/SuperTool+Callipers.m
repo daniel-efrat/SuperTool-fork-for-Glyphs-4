@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import "SuperTool+Callipers.h"
-#import <GlyphsCore/GSGeometrieHelper.h>
+#import <GlyphsCore/GlyphsCore.h>
 
 int STEPS_VALUE = 500;
 
@@ -56,7 +56,7 @@ NSMutableArray *rainbow;
 - (void)callipersMouseDragged:(NSEvent *)theEvent {
     NSPoint loc = [_editViewController.graphicView getActiveLocation:theEvent];
     [_editViewController.graphicView setNeedsDisplay:YES];
-    if ([theEvent modifierFlags] & NSShiftKeyMask) {
+    if ([theEvent modifierFlags] & NSEventModifierFlagShift) {
         CGFloat dx = fabs(loc.x - self.draggStart.x);
         CGFloat dy = fabs(loc.y - self.draggStart.y);
         if (dx < dy) {
@@ -139,7 +139,6 @@ NSMutableArray *rainbow;
         // NSLog(@"end2: %@, %lu, %g", segEnd2->path, segEnd2->segId, segEnd2->t);
         [_editViewController.graphicView setNeedsDisplay:YES];
     }
-    
 }
 
 // Find the point on a curve nearest to a given point.
