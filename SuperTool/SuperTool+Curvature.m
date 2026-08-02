@@ -14,12 +14,17 @@
 
 #import "SuperTool+Curvature.h"
 #import <AppKit/AppKit.h>
+#import <GlyphsCore/GlyphsCore.h>
 
 
 float STMaxCurvatureForPoints(NSPoint p1, NSPoint p2, NSPoint p3, NSPoint p4) {
     float maxC = 0.0;
     for (float t = 0.0 ; t <= 1.0; t+= 0.02) {
+#ifdef GLYPHS3
         CGFloat c = sqrt(curvatureSquaredForT(p1, p2, p3, p4, t));
+#else
+        CGFloat c = sqrt(GSCurvatureSquaredForT(p1, p2, p3, p4, t));
+#endif
         if (c > maxC) {
             maxC = c;
         }
@@ -210,10 +215,20 @@ static bool inited = false;
 // This draws normals scaled by their curvature
 - (void)drawRainbowsForP1:(NSPoint)p1 p2:(NSPoint)p2 p3:(NSPoint)p3 p4:(NSPoint)p4 {
     float t = 0.0;
+#ifdef GLYPHS3
     CGFloat slen = GSLengthOfSegment(p1, p2, p3, p4);
+#else
+    CGFloat slen = GSLengthOfCubicPoints(p1, p2, p3, p4);
+#endif
     while (t <= 1.0) {
-        NSPoint normal = normalForT(p1, p2, p3, p4, t);
+#ifdef GLYPHS3
+        NSPoint normal = GSNormalCubicForT(p1, p2, p3, p4, t);
         CGFloat c = sqrt(curvatureSquaredForT(p1, p2, p3, p4, t));
+#else
+        NSPoint normal = GSNormalCubicForT(p1, p2, p3, p4, t);
+        CGFloat c = sqrt(GSCurvatureSquaredForT(p1, p2, p3, p4, t));
+
+#endif
         CGFloat angle = GSAngleOfVector(normal);
         if (angle <0) { angle = 180 + angle; }
         angle = fmod(angle, 90.0);
@@ -226,8 +241,13 @@ static bool inited = false;
         if (c <= 10.0) {
             [col setStroke];
             NSBezierPath *path = [NSBezierPath bezierPath];
-            [path moveToPoint:GSAddPoints(GSPointAtTime(p1, p2, p3, p4, t), GSScalePoint(normal, -4000 * c))];
-            NSPoint end = GSAddPoints(GSPointAtTime(p1, p2, p3, p4, t), GSScalePoint(normal, 4000 * c));
+#ifdef GLYPHS3
+            [path moveToPoint:GSAddPoints(GSPointOnCurve(p1, p2, p3, p4, t), GSScalePoint(normal, -4000 * c))];
+            NSPoint end = GSAddPoints(GSPointOnCurve(p1, p2, p3, p4, t), GSScalePoint(normal, 4000 * c));
+#else
+            [path moveToPoint:GSAddPoints(GSPointOnCubicPoints(p1, p2, p3, p4, t), GSScalePoint(normal, -4000 * c))];
+            NSPoint end = GSAddPoints(GSPointOnCubicPoints(p1, p2, p3, p4, t), GSScalePoint(normal, 4000 * c));
+#endif
             [path setLineWidth:0];
             [path lineToPoint:end];
             [path stroke];
@@ -243,7 +263,11 @@ static bool inited = false;
 
     float t = 0.0;
     NSBezierPath *path = [NSBezierPath bezierPath];
-    [path moveToPoint:GSPointAtTime(p1, p2, p3, p4, 0)];
+#ifdef GLYPHS3
+    [path moveToPoint:GSPointOnCurve(p1, p2, p3, p4, 0)];
+#else
+    [path moveToPoint:GSPointOnCubicPoints(p1, p2, p3, p4, 0)];
+#endif
 
     NSColor *grey = [[NSColor textColor] colorWithAlphaComponent:0.15];
     NSColor *emptyRed = [[NSColor systemRedColor] colorWithAlphaComponent:alwaysShow ? 0.25 : 0];
@@ -253,12 +277,20 @@ static bool inited = false;
     combScale /= maxC;
     float thisMaxC = 0.0;
     for (t = 0.0 ; t <= 1.0; t += 0.02) {
-        NSPoint normal = normalForT(p1, p2, p3, p4, t);
+        NSPoint normal = GSNormalCubicForT(p1, p2, p3, p4, t);
+#ifdef GLYPHS3
         CGFloat c = sqrt(curvatureSquaredForT(p1, p2, p3, p4, t));
+#else
+        CGFloat c = sqrt(GSCurvatureSquaredForT(p1, p2, p3, p4, t));
+#endif
         if (c > thisMaxC) thisMaxC = c;
         if (c <= 10.0) {
             // Push this point on the curve out along its normal by an amount related to the curvature
-            NSPoint end = GSAddPoints(GSPointAtTime(p1, p2, p3, p4, t), GSScalePoint(normal, combScale * c));
+#ifdef GLYPHS3
+            NSPoint end = GSAddPoints(GSPointOnCurve(p1, p2, p3, p4, t), GSScalePoint(normal, combScale * c));
+#else
+            NSPoint end = GSAddPoints(GSPointOnCubicPoints(p1, p2, p3, p4, t), GSScalePoint(normal, combScale * c));
+#endif
             [path setLineWidth:1];
             [path lineToPoint:end];
         }
@@ -266,7 +298,11 @@ static bool inited = false;
 
     // Fade from grey to light pink depending on tightness of segment
     [[grey blendedColorWithFraction:thisMaxC * 20 ofColor:emptyRed] set];
-    [path lineToPoint:GSPointAtTime(p1, p2, p3, p4, 1)];
+#ifdef GLYPHS3
+    [path lineToPoint:GSPointOnCurve(p1, p2, p3, p4, 1)];
+#else
+    [path lineToPoint:GSPointOnCubicPoints(p1, p2, p3, p4, 1)];
+#endif
     [path curveToPoint:p1 controlPoint1:p3 controlPoint2:p2];
     [path fill];
 }

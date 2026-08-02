@@ -15,7 +15,12 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import <GlyphsCore/GlyphsCore.h>
+#ifdef GLYPHS3
 #import <GlyphsCore/GSToolSelect.h>
+#else
+#import <GlyphsApp/GSToolSelect.h>
+#endif
 
 //#define DEBUG_MODE
 

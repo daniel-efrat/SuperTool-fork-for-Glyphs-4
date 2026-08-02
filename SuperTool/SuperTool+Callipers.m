@@ -36,7 +36,7 @@ NSMutableArray *rainbow;
     // Called when the mouse button is clicked.
     _editViewController = [_windowController activeEditViewController];
     callipersLayer = [_editViewController.graphicView activeLayer];
-    _draggStart = [_editViewController.graphicView getActiveLocation:theEvent];
+    self.dragStart = [_editViewController.graphicView getActiveLocation:theEvent];
     _dragging = true;
     if (tool_state == DRAWING_START) {
         // NSLog(@"Clearing start");
@@ -57,15 +57,19 @@ NSMutableArray *rainbow;
     NSPoint loc = [_editViewController.graphicView getActiveLocation:theEvent];
     [_editViewController.graphicView setNeedsDisplay:YES];
     if ([theEvent modifierFlags] & NSEventModifierFlagShift) {
-        CGFloat dx = fabs(loc.x - self.draggStart.x);
-        CGFloat dy = fabs(loc.y - self.draggStart.y);
+        CGFloat dx = fabs(loc.x - self.dragStart.x);
+        CGFloat dy = fabs(loc.y - self.dragStart.y);
         if (dx < dy) {
-            loc.x = self.draggStart.x;
+            loc.x = self.dragStart.x;
         } else {
-            loc.y = self.draggStart.y;
+            loc.y = self.dragStart.y;
         }
     }
+#ifdef GLYPHS3
     _draggCurrent = loc;
+#else
+    _dragCurrent = loc;
+#endif
 }
 
 - (void)callipersMouseUp:(NSEvent *)theEvent {
@@ -74,8 +78,12 @@ NSMutableArray *rainbow;
     if (!([theEvent modifierFlags] & NSEventModifierFlagOption)) {
         return [super mouseUp:theEvent];
     }
-    NSPoint startPoint = self.draggStart;
+    NSPoint startPoint = self.dragStart;
+#ifdef GLYPHS3
     NSPoint endPoint   = _draggCurrent;
+#else
+    NSPoint endPoint   = _dragCurrent;
+#endif
     GSLayer *layer = [_editViewController.graphicView activeLayer];
     _dragging = false;
     NSMutableArray *intersections = [NSMutableArray array];
@@ -101,9 +109,17 @@ NSMutableArray *rainbow;
                 NSPoint handle1 = [thisSeg pointAtIndex:1];
                 NSPoint handle2 = [thisSeg pointAtIndex:2];
                 NSPoint segend = [thisSeg pointAtIndex:3];
+#ifdef GLYPHS3
                 NSArray *localIntersections = GSIntersectBezier3Line(segstart, handle1, handle2, segend, startPoint, endPoint);
                 for (id _pt in localIntersections) {
                     NSPoint pt = [_pt pointValue];
+#else
+                GSIntersectResultsStruct intersection;
+                intersection.count = 0;
+                GSIntersectCubicLineA(segstart, handle1, handle2, segend, startPoint, endPoint, &intersection);
+                for (int idx = 0; idx < intersection.count; idx++) {
+                    NSPoint pt = intersection.results[idx];
+#endif
                     CGFloat t;
                     [p nearestPointOnPath:pt pathTime:&t];
                     t = fmod(t, 1.0);
@@ -178,8 +194,12 @@ NSMutableArray *rainbow;
         if (_dragging) {
             NSBezierPath *path = [NSBezierPath bezierPath];
             [path setLineWidth:1];
-            [path moveToPoint:_draggStart];
+            [path moveToPoint:self.dragStart];
+#ifdef GLYPHS3
             [path lineToPoint:_draggCurrent];
+#else
+            [path lineToPoint:_dragCurrent];
+#endif
             if (tool_state == DRAWING_START) {
                 [[NSColor greenColor] set];
             } else { [[NSColor redColor] set]; }

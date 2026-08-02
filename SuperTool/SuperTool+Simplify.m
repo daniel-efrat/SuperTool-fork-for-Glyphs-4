@@ -73,7 +73,7 @@ bool willUndo = true;
         if (![n isKindOfClass:[GSNode class]]) continue;
         if ([n type] == GSNodeTypeOffCurve) continue;
         GSPath *rerootedPath;
-        GSPath *origPath = [n parent];
+        GSPath *origPath = [n parentPath];
         GSLayer *layer = [origPath layer];
         SCLog(@"Looking for %@ in %@", origPath, copiedPaths);
         NSNumber *pindex = [NSNumber numberWithLong:[layer indexOfObjectInShapes:origPath]];
@@ -83,7 +83,7 @@ bool willUndo = true;
             [copiedPaths setObject:rerootedPath forKey:pindex];
             SCLog(@"Cloned %@ to %@", [n parent], rerootedPath);
         }
-        GSNode *rerootedNode = [rerootedPath nodeAtIndex:[[n parent] indexOfNode:n]];
+        GSNode *rerootedNode = [rerootedPath nodeAtIndex:[[n parentPath] indexOfNode:n]];
         [mySelection addObject:rerootedNode];
         NSValue *rerootedNodeKey = [NSValue valueWithNonretainedObject:rerootedNode];
         [originalPaths setObject:[n parent] forKey:rerootedNodeKey];
@@ -92,20 +92,20 @@ bool willUndo = true;
     }
     SCLog(@"Sorting selection %@", mySelection);
     [mySelection sortUsingComparator:^ NSComparisonResult(GSNode *a, GSNode *b) {
-        GSPath *p = [a parent];
+        GSPath *p = [a parentPath];
         if (p != [b parent]) {
             GSLayer *l = [[p parent] layer];
-            return [l indexOfObjectInShapes:p] < [l indexOfObjectInShapes:[b parent]] ? NSOrderedAscending : NSOrderedDescending;
+            return [l indexOfObjectInShapes:p] < [l indexOfObjectInShapes:[b parentPath]] ? NSOrderedAscending : NSOrderedDescending;
         }
         return ([p indexOfNode:a] < [p indexOfNode:b]) ? NSOrderedAscending : NSOrderedDescending;
     }];
     SCLog(@"Selection is now %@", mySelection);
     for (n in mySelection) {
         nn = [n nextOnCurve];
-        if ([[nn parent] indexOfNode:nn] < [[n parent] indexOfNode:n]) {
+        if ([[nn parentPath] indexOfNode:nn] < [[n parentPath] indexOfNode:n]) {
             continue;
         }
-        SCLog(@"Considering %@ (parent: %@, index %ld), next-on-curve: %@", n, [n parent], [[n parent] indexOfNode:n], nn);
+        SCLog(@"Considering %@ (parent: %@, index %ld), next-on-curve: %@", n, [n parent], [[n parentPath] indexOfNode:n], nn);
         if ([mySelection containsObject:nn]) {
             [self addToSelectionSegmentStarting:n Ending:nn];
             SCLog(@"Added %@ -> %@ (next), Selection set is %@", n, nn, simplifySegSet);
@@ -116,8 +116,8 @@ bool willUndo = true;
         GSNode *b = [a firstObject];
         GSNode *e = [a lastObject];
         SCLog(@"Fixing seg set to splice set: %@, %@ (parents: %@, %@)", b, e, [b parent], [e parent]);
-        NSUInteger bIndex = [[b parent] indexOfNode:b];
-        NSUInteger eIndex = [[e parent] indexOfNode:e];
+        NSUInteger bIndex = [[b parentPath] indexOfNode:b];
+        NSUInteger eIndex = [[e parentPath] indexOfNode:e];
         NSRange range = NSMakeRange(bIndex, eIndex-bIndex);
         [simplifySpliceSet addObject:[NSValue valueWithRange:range]];
         // Here we must add the original parent

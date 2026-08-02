@@ -37,7 +37,11 @@
         // NSLog(@"p1=[%g,%g] at t(%g)= [%g,%g] p2=[%g,%g]", p1.x, p1.y, fmod(t, 1.0), x, y, p2.x, p2.y);
         return NSMakePoint(x, y);
     }
-    NSPoint p = GSPointAtTime(
+#ifdef GLYPHS3
+    NSPoint p = GSPointOnCurve(
+#else
+    NSPoint p = GSPointOnCubicPoints(
+#endif
         [seg pointAtIndex:0],
         [seg pointAtIndex:1],
         [seg pointAtIndex:2],
@@ -91,8 +95,13 @@
         NSPoint i2 = [seg pointAtIndex:1];
         NSPoint i3 = [seg pointAtIndex:2];
         NSPoint i4 = [seg pointAtIndex:3];
-        GSSegmentBetweenPoints(i1, i2, i3, i4, &o1, &o2, &o3, &o4, GSPointAtTime(i1, i2, i3, i4, t1), GSPointAtTime(i1, i2, i3, i4, t2));
+#ifdef GLYPHS3
+        GSSegmentBetweenPoints(i1, i2, i3, i4, &o1, &o2, &o3, &o4, GSPointOnCurve(i1, i2, i3, i4, t1), GSPointOnCurve(i1, i2, i3, i4, t2));
         return GSLengthOfSegment(o1, o2, o3, o4);
+#else
+        GSSegmentBetweenPoints(i1, i2, i3, i4, &o1, &o2, &o3, &o4, GSPointOnCubicPoints(i1, i2, i3, i4, t1), GSPointOnCubicPoints(i1, i2, i3, i4, t2));
+        return GSLengthOfCubicPoints(o1, o2, o3, o4);
+#endif
     }
 }
 
