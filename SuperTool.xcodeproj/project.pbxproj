@@ -7,11 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		560EE448301F52A3003CB9C0 /* SuperTool.m in Sources */ = {isa = PBXBuildFile; fileRef = F4B03C991CC88E7100564F32 /* SuperTool.m */; };
+		560EE449301F52A3003CB9C0 /* SuperTool+Curvature.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A86CC1CF0899000B14CC2 /* SuperTool+Curvature.m */; };
+		560EE44A301F52A3003CB9C0 /* SuperTool+TunniEditing.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A86C91CF055C800B14CC2 /* SuperTool+TunniEditing.m */; };
+		560EE44B301F52A3003CB9C0 /* SuperTool+Callipers.m in Sources */ = {isa = PBXBuildFile; fileRef = F4411BCC1EB86C7B00F4D64B /* SuperTool+Callipers.m */; };
+		560EE44C301F52A3003CB9C0 /* SCCurveFitter.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A2251E98B28C008A62B7 /* SCCurveFitter.m */; };
+		560EE44D301F52A3003CB9C0 /* SuperTool+Harmonize.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A86CF1CF08B8500B14CC2 /* SuperTool+Harmonize.m */; };
+		560EE44E301F52A3003CB9C0 /* SuperTool+Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = F479451D1CF699C600EB214B /* SuperTool+Simplify.m */; };
+		560EE44F301F52A3003CB9C0 /* GSNode+SCNodeUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A21F1E98B28C008A62B7 /* GSNode+SCNodeUtils.m */; };
+		560EE450301F52A3003CB9C0 /* GSPath+SCPathUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A2211E98B28C008A62B7 /* GSPath+SCPathUtils.m */; };
+		560EE451301F52A3003CB9C0 /* SCCurveFitter+Tangents.m in Sources */ = {isa = PBXBuildFile; fileRef = F4C6A2231E98B28C008A62B7 /* SCCurveFitter+Tangents.m */; };
+		560EE452301F52A3003CB9C0 /* SCPathTime.m in Sources */ = {isa = PBXBuildFile; fileRef = F4CA636C1CE04B4A002EA26E /* SCPathTime.m */; };
+		560EE453301F52A3003CB9C0 /* GSLayer+SCLayerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F42D0B261FD527240090BD3A /* GSLayer+SCLayerUtils.m */; };
+		560EE454301F52A3003CB9C0 /* SuperTool+Coverage.m in Sources */ = {isa = PBXBuildFile; fileRef = F42D0B2C1FD527E80090BD3A /* SuperTool+Coverage.m */; };
+		560EE456301F52A3003CB9C0 /* SimplifyInterface.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4CA636E1CE04BA6002EA26E /* SimplifyInterface.xib */; };
+		560EE457301F52A3003CB9C0 /* ToolbarIconTemplate.pdf in Resources */ = {isa = PBXBuildFile; fileRef = F4B03C9C1CC88E7100564F32 /* ToolbarIconTemplate.pdf */; };
+		560EE45C301F52A3003CB9C0 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4B03C911CC88E7100564F32 /* Cocoa.framework */; };
 		F42D0B271FD527240090BD3A /* GSLayer+SCLayerUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F42D0B261FD527240090BD3A /* GSLayer+SCLayerUtils.m */; };
 		F42D0B2D1FD527E80090BD3A /* SuperTool+Coverage.m in Sources */ = {isa = PBXBuildFile; fileRef = F42D0B2C1FD527E80090BD3A /* SuperTool+Coverage.m */; };
 		F4411BCD1EB86C7B00F4D64B /* SuperTool+Callipers.m in Sources */ = {isa = PBXBuildFile; fileRef = F4411BCC1EB86C7B00F4D64B /* SuperTool+Callipers.m */; };
 		F479451E1CF699C600EB214B /* SuperTool+Simplify.m in Sources */ = {isa = PBXBuildFile; fileRef = F479451D1CF699C600EB214B /* SuperTool+Simplify.m */; };
-		F49910682463F08D00E305DE /* GlyphsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F49910672463F08D00E305DE /* GlyphsCore.framework */; };
 		F49A86CA1CF055C800B14CC2 /* SuperTool+TunniEditing.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A86C91CF055C800B14CC2 /* SuperTool+TunniEditing.m */; };
 		F49A86CD1CF0899000B14CC2 /* SuperTool+Curvature.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A86CC1CF0899000B14CC2 /* SuperTool+Curvature.m */; };
 		F49A86D01CF08B8500B14CC2 /* SuperTool+Harmonize.m in Sources */ = {isa = PBXBuildFile; fileRef = F49A86CF1CF08B8500B14CC2 /* SuperTool+Harmonize.m */; };
@@ -27,6 +42,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		560EE458301F52A3003CB9C0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4EB4A931CCCF105002DBA8F /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -39,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		560EE460301F52A3003CB9C0 /* SuperTool4.glyphsTool */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperTool4.glyphsTool; sourceTree = BUILT_PRODUCTS_DIR; };
 		F42D0B241FD522820090BD3A /* GSLayer+SCLayerUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GSLayer+SCLayerUtils.h"; sourceTree = "<group>"; };
 		F42D0B261FD527240090BD3A /* GSLayer+SCLayerUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "GSLayer+SCLayerUtils.m"; sourceTree = "<group>"; };
 		F42D0B2B1FD527E80090BD3A /* SuperTool+Coverage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SuperTool+Coverage.h"; sourceTree = "<group>"; };
@@ -47,7 +72,6 @@
 		F4411BCC1EB86C7B00F4D64B /* SuperTool+Callipers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SuperTool+Callipers.m"; sourceTree = "<group>"; };
 		F479451C1CF699C600EB214B /* SuperTool+Simplify.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SuperTool+Simplify.h"; sourceTree = "<group>"; };
 		F479451D1CF699C600EB214B /* SuperTool+Simplify.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SuperTool+Simplify.m"; sourceTree = "<group>"; };
-		F49910672463F08D00E305DE /* GlyphsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GlyphsCore.framework; path = "/Applications/Glyphs 3.app/Contents/Frameworks/GlyphsCore.framework"; sourceTree = "<absolute>"; };
 		F49A86C81CF055C800B14CC2 /* SuperTool+TunniEditing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SuperTool+TunniEditing.h"; sourceTree = "<group>"; };
 		F49A86C91CF055C800B14CC2 /* SuperTool+TunniEditing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SuperTool+TunniEditing.m"; sourceTree = "<group>"; };
 		F49A86CB1CF0899000B14CC2 /* SuperTool+Curvature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SuperTool+Curvature.h"; sourceTree = "<group>"; };
@@ -76,11 +100,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		560EE459301F52A3003CB9C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				560EE45C301F52A3003CB9C0 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4B03C8B1CC88E7100564F32 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F49910682463F08D00E305DE /* GlyphsCore.framework in Frameworks */,
 				F4B03C921CC88E7100564F32 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				F4B03C8E1CC88E7100564F32 /* SuperTool.glyphsTool */,
+				560EE460301F52A3003CB9C0 /* SuperTool4.glyphsTool */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,7 +141,6 @@
 		F4B03C901CC88E7100564F32 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F49910672463F08D00E305DE /* GlyphsCore.framework */,
 				F4B03C911CC88E7100564F32 /* Cocoa.framework */,
 			);
 			name = Frameworks;
@@ -172,6 +203,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		560EE446301F52A3003CB9C0 /* SuperTool4 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 560EE45D301F52A3003CB9C0 /* Build configuration list for PBXNativeTarget "SuperTool4" */;
+			buildPhases = (
+				560EE447301F52A3003CB9C0 /* Sources */,
+				560EE455301F52A3003CB9C0 /* Resources */,
+				560EE458301F52A3003CB9C0 /* CopyFiles */,
+				560EE459301F52A3003CB9C0 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SuperTool4;
+			productName = SuperTool;
+			productReference = 560EE460301F52A3003CB9C0 /* SuperTool4.glyphsTool */;
+			productType = "com.apple.product-type.bundle";
+		};
 		F4B03C8D1CC88E7100564F32 /* SuperTool */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4B03CA31CC88E7100564F32 /* Build configuration list for PBXNativeTarget "SuperTool" */;
@@ -199,9 +248,13 @@
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = "Simon Cozens";
 				TargetAttributes = {
+					560EE446301F52A3003CB9C0 = {
+						DevelopmentTeam = X2L8375ZQ7;
+						ProvisioningStyle = Automatic;
+					};
 					F4B03C8D1CC88E7100564F32 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = GHYRZM4TBD;
+						DevelopmentTeam = X2L8375ZQ7;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -220,11 +273,21 @@
 			projectRoot = "";
 			targets = (
 				F4B03C8D1CC88E7100564F32 /* SuperTool */,
+				560EE446301F52A3003CB9C0 /* SuperTool4 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		560EE455301F52A3003CB9C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				560EE456301F52A3003CB9C0 /* SimplifyInterface.xib in Resources */,
+				560EE457301F52A3003CB9C0 /* ToolbarIconTemplate.pdf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4B03C8C1CC88E7100564F32 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -237,6 +300,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		560EE447301F52A3003CB9C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				560EE448301F52A3003CB9C0 /* SuperTool.m in Sources */,
+				560EE449301F52A3003CB9C0 /* SuperTool+Curvature.m in Sources */,
+				560EE44A301F52A3003CB9C0 /* SuperTool+TunniEditing.m in Sources */,
+				560EE44B301F52A3003CB9C0 /* SuperTool+Callipers.m in Sources */,
+				560EE44C301F52A3003CB9C0 /* SCCurveFitter.m in Sources */,
+				560EE44D301F52A3003CB9C0 /* SuperTool+Harmonize.m in Sources */,
+				560EE44E301F52A3003CB9C0 /* SuperTool+Simplify.m in Sources */,
+				560EE44F301F52A3003CB9C0 /* GSNode+SCNodeUtils.m in Sources */,
+				560EE450301F52A3003CB9C0 /* GSPath+SCPathUtils.m in Sources */,
+				560EE451301F52A3003CB9C0 /* SCCurveFitter+Tangents.m in Sources */,
+				560EE452301F52A3003CB9C0 /* SCPathTime.m in Sources */,
+				560EE453301F52A3003CB9C0 /* GSLayer+SCLayerUtils.m in Sources */,
+				560EE454301F52A3003CB9C0 /* SuperTool+Coverage.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F4B03C8A1CC88E7100564F32 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -260,6 +343,70 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		560EE45E301F52A3003CB9C0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 4;
+				DEPLOYMENT_LOCATION = YES;
+				DEVELOPMENT_TEAM = X2L8375ZQ7;
+				DSTROOT = "$(USER_LIBRARY_DIR)/Application Support/Glyphs 4/Plugins";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SYSTEM_APPS_DIR)/Glyphs 4.app/Contents/Frameworks\"",
+					"$(PROJECT_DIR)/SuperTool/",
+				);
+				GCC_PREFIX_HEADER = "SuperTool/SuperTool-Prefix.pch";
+				INFOPLIST_FILE = SuperTool/Info.plist;
+				INSTALL_PATH = /;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks/";
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MARKETING_VERSION = 1.2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					GlyphsCore,
+					"-framework",
+					GlyphsApp,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.simon-cozens.SuperTool";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				WRAPPER_EXTENSION = glyphsTool;
+			};
+			name = Debug;
+		};
+		560EE45F301F52A3003CB9C0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = X2L8375ZQ7;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SYSTEM_APPS_DIR)/Glyphs 4.app/Contents/Frameworks\"",
+					"$(PROJECT_DIR)/SuperTool/",
+				);
+				GCC_PREFIX_HEADER = "SuperTool/SuperTool-Prefix.pch";
+				INFOPLIST_FILE = SuperTool/Info.plist;
+				INSTALL_PATH = /;
+				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks/";
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
+				MARKETING_VERSION = 1.2;
+				OTHER_LDFLAGS = (
+					"-framework",
+					GlyphsCore,
+					"-framework",
+					GlyphsApp,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.simon-cozens.SuperTool";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				WRAPPER_EXTENSION = glyphsTool;
+			};
+			name = Release;
+		};
 		F4B03CA11CC88E7100564F32 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -365,10 +512,9 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(USER_LIBRARY_DIR)/Application Support/Glyphs/Plugins/";
 				CURRENT_PROJECT_VERSION = 3;
 				DEPLOYMENT_LOCATION = YES;
-				DEVELOPMENT_TEAM = GHYRZM4TBD;
+				DEVELOPMENT_TEAM = X2L8375ZQ7;
 				DSTROOT = "$(USER_LIBRARY_DIR)/Application Support/Glyphs 3/Plugins";
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SYSTEM_APPS_DIR)/Glyphs 3.app/Contents/Frameworks\"",
@@ -379,6 +525,10 @@
 				INSTALL_PATH = /;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks/";
 				MARKETING_VERSION = 1.1;
+				OTHER_LDFLAGS = (
+					"-framework",
+					GlyphsCore,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.simon-cozens.SuperTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -392,8 +542,8 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = GHYRZM4TBD;
 				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = X2L8375ZQ7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SYSTEM_APPS_DIR)/Glyphs 3.app/Contents/Frameworks\"",
 					"$(PROJECT_DIR)/SuperTool/",
@@ -403,6 +553,10 @@
 				INSTALL_PATH = /;
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks/";
 				MARKETING_VERSION = 1.1;
+				OTHER_LDFLAGS = (
+					"-framework",
+					GlyphsCore,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.simon-cozens.SuperTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -413,6 +567,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		560EE45D301F52A3003CB9C0 /* Build configuration list for PBXNativeTarget "SuperTool4" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				560EE45E301F52A3003CB9C0 /* Debug */,
+				560EE45F301F52A3003CB9C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		F4B03C891CC88E7100564F32 /* Build configuration list for PBXProject "SuperTool" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
